@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cont-form {
+    width: 100%;
+    max-width: 550px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border: 1px solid #0fb9b1;
+    overflow: hidden;
+    max-height: 90%;
+    overflow: overlay;
+    /*    padding: 1.5em 2em;*/
+}
+
+.cont-form h2 {
+    width: 100%;
+    background-color: #0fb9b1;
+    padding: .5em 1.5em;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cont-form h2 span {
+    font-size: .6em;
+}
+
+.cont-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 1.5em 2em;
+}
+
+.cont-input,
+.group-input,
+.card {
+    display: flex;
+    width: 100%;
+}
+
+.cont-input {
+    flex-direction: column;
+}
+
+.group-input,
+.card {
+    gap: .4em;
+}
+
+.cont-input input {
+    width: 100%;
+}
+
+input {
+    padding: 9px 10px;
+    outline: none;
+    border: 1px solid #d4d4d4;
+}
+
+form h3 {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+.card {
+    flex-direction: column;
+    padding: 1em;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.cont-agregar {
+    margin-top: 10px;
+}
+
+.cont-agregar a {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #a7f3e0d2;
+    transition: all ease .5s;
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    -ms-transition: all ease .5s;
+    -o-transition: all ease .5s;
+    font-size: .8em;
+}
+
+.cont-agregar a i {
+    margin-right: 5px;
+}
+
+.cont-agregar a:hover {
+    background-color: #55E6C1;
+}
+
+form button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #0fb9b1;
+    border: 1px solid #0fb9b1;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all ease .5s;
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    -ms-transition: all ease .5s;
+    -o-transition: all ease .5s;
+}
+
+form button:hover {
+    background-color: #55E6C1;
+    border: 1px solid #55E6C1;
+}
+
+form label {
+    color: #8a8989;
+    font-size: .9em;
+}
+
+.others_contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 1em
+}
+
+.cont-form::-webkit-scrollbar {
+    appearance: none;
+}
+
+.cont-form::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+
+.cont-form::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.cont-form::-webkit-scrollbar-thumb {
+    background-color: #d4d4d4;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.cont-form::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.btnRemoveContact {
+    position: absolute;
+    background-color: #c0392b;
+    color: #FFF;
+    top: 0;
+    right: 0;
+    padding: 4px 10px;
+    font-size: .8em;
+    border-radius: 0 0 0 10px;
+    -webkit-border-radius: 0 0 0 10px;
+    -moz-border-radius: 0 0 0 10px;
+    -ms-border-radius: 0 0 0 10px;
+    -o-border-radius: 0 0 0 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
