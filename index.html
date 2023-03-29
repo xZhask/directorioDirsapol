@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/47b4aaa3bf.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="resources/js/jquery-ui-1.13.1/jquery-ui.min.css">
     <link rel="stylesheet" href="resources/css/style.css">
     <title>Document</title>
 </head>
@@ -16,7 +17,12 @@
             <h2>Registro de Contacto
                 <span>UNIINSAN - ESTADÍSTICA DIRSAPOL</span>
             </h2>
-            <form id="formContact">
+            <form id="formContact" autocomplete="off">
+                <div class="cont-input">
+                    <label for="nombreIpress">Nombre Ipress</label>
+                    <input type="hidden" name="idIpress">
+                    <input type="text" name="nombreIpress" id="nombreIpress" placeholder="Nombre de Ipress">
+                </div>
                 <div class="cont-input">
                     <label for="nombreJefe">Nombre Jefe de estadística</label>
                     <input type="text" name="nombreJefe" id="nombreJefe">
@@ -28,7 +34,7 @@
                     </div>
                     <div class="cont-input">
                         <label for="telefonoJefe">Teléfono</label>
-                        <input type="tel" name="telefonoJefe" id="telefonoJefe">
+                        <input type="tel" name="telefonoJefe" id="telefonoJefe" class="phone">
                     </div>
                 </div>
                 <div class="cont-input">
@@ -41,16 +47,16 @@
                     <div class="card" id="card-1">
                         <div class="cont-input">
                             <label for="nombreOtro1">Nombre</label>
-                            <input type="text" name="nombreOtro1" id="nombreOtro1">
+                            <input type="text" name="nombreOtro1" id="nombreOtro1" class="nameOthers">
                         </div>
                         <div class="group-input">
                             <div class="cont-input">
                                 <label for="gradoOtro1">Grado</label>
-                                <input type="text" name="gradoOtro1" id="gradoOtro1">
+                                <input type="text" name="gradoOtro1" id="gradoOtro1" class="gradoOthers">
                             </div>
                             <div class="cont-input">
                                 <label for="telefonoOtro1">Teléfono</label>
-                                <input type="tel" name="telefonoOtro1" id="telefonoOtro1">
+                                <input type="tel" name="telefonoOtro1" id="telefonoOtro1" class="phone phoneOthers">
                             </div>
                         </div>
                         <a class="btnRemoveContact" onclick="removeContact(1)">Quitar</a>
@@ -63,7 +69,8 @@
             </form>
         </div>
     </div>
-
+    <script language="javascript" src="resources/js/jquery-3.6.0.min.js"></script>
+    <script language="javascript" src="resources/js/jquery-ui-1.13.1/jquery-ui.min.js"></script>
     <script src="resources/js/main.js"></script>
 </body>
 

@@ -2,6 +2,7 @@ const btnAddContacto = document.querySelector('#btnAddNumber');
 const divContact = document.querySelector('.others_contacts');
 const formContacto = document.querySelector('#formContact')
 
+
 let contador = 1;
 
 btnAddContacto.addEventListener('click', () => {
@@ -41,10 +42,15 @@ btnAddContacto.addEventListener('click', () => {
     labelTelefono.appendChild(labelTelefonoText)
     inputNombre.setAttribute('type', 'text')
     inputNombre.setAttribute('name', `nombreOtro${contador}`)
+    inputNombre.classList.add('nameOthers')
     inputGrado.setAttribute('type', 'text')
     inputGrado.setAttribute('name', `gradoOtro${contador}`)
+    inputGrado.classList.add('gradoOthers')
     inputTelefono.setAttribute('type', 'tel')
     inputTelefono.setAttribute('name', `telefonoOtro${contador}`)
+    inputTelefono.classList.add('phone')
+    inputTelefono.classList.add('phoneOthers')
+
 
     contInputGrado.appendChild(labelGrado)
     contInputGrado.appendChild(inputGrado)
@@ -67,5 +73,59 @@ function removeContact(idContact) {
 formContacto.addEventListener('submit', (e) => {
     e.preventDefault()
     let cantDivs = document.getElementsByClassName('card').length;
-    alert(`form enviado con ${cantDivs} divs`)
+    let otherContacts = [];
+    let otherContact = {};
+    for (let i = 0; i < cantDivs; i++) {
+        const nombre = document.querySelectorAll('.nameOthers')[i].value;
+        const telefono = document.querySelectorAll('.phoneOthers')[i].value;
+        const grado = document.querySelectorAll('.gradoOthers')[i].value;
+        otherContact.nombre = `${nombre}`;
+        otherContact.phone = `${telefono}`;
+        otherContact.grado = `${grado}`;
+        otherContacts.push(otherContact)
+    }
+    console.log(otherContacts)
+    //let namesOthers = document.querySelectorAll('.nameOthers')[1];
+    //console.log(namesOthers)
+    //alert(`form enviado con ${cantDivs} divs - 1: ${nombreOtro}`)
+
 })
+
+/* APP */
+async function postData(data) {
+    const response = await fetch("App/controllers/controller.php", {
+        method: "POST",
+        body: data,
+    }).then((res) => res.json());
+    return await response;
+}
+
+window.addEventListener("load", async () => {
+    const datos = new FormData();
+    datos.append("accion", "LISTAR_UNIDADES");
+    const cargarUnidades = await postData(datos);
+    const unidadesList = cargarUnidades.map((unidad) => unidad.nombreIpress);
+    CargarAutocompletado(unidadesList, cargarUnidades);
+});
+
+
+function CargarAutocompletado(list, unidades) {
+    $("#nombreIpress").autocomplete({
+        source: list,
+        select: (e, item) => {
+            let unidad = item.item.value;
+            let position = list.indexOf(unidad);
+            idIpress = unidades[position].idIpress;
+            alert(idIpress)
+        },
+    });
+}
+const isNumber = (e) => {
+    if (e.keyCode < 48 || e.keyCode > 57) return false;
+};
+const isSpace = (e) => {
+    if (e.keyCode == 32) return false;
+};
+$(document).on("keypress", ".phone", (e) => { return isNumber(e); });
+$(document).on("keypress", "#correoIpress", (e) => { return isSpace(e); });
+
