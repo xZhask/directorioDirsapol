@@ -45,7 +45,7 @@
 .cont-form form {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     padding: 1.5em 2em;
 }
 
@@ -58,6 +58,16 @@
 
 .cont-input {
     flex-direction: column;
+    position: relative;
+}
+
+.cont-input label {
+    position: absolute;
+    top: -7px;
+    background-color: #fff;
+    left: 7px;
+    font-size: .8em;
+    padding: 0 5px;
 }
 
 .group-input,
@@ -76,9 +86,10 @@ input {
 }
 
 form h3 {
-    padding: 5px 0;
+    padding-bottom: 5px;
     border-bottom: 1px solid #ddd;
     margin: 10px 0;
+    font-size: 1em;
 }
 
 .card {
@@ -86,6 +97,7 @@ form h3 {
     padding: 1em;
     border: 1px solid #ddd;
     position: relative;
+    gap: 10px;
 }
 
 .cont-agregar {

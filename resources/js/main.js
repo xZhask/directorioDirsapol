@@ -70,26 +70,32 @@ btnAddContacto.addEventListener('click', () => {
 function removeContact(idContact) {
     document.getElementById(`card-${idContact}`).remove()
 }
-formContacto.addEventListener('submit', (e) => {
+formContacto.addEventListener('submit', async (e) => {
     e.preventDefault()
     let cantDivs = document.getElementsByClassName('card').length;
     let otherContacts = [];
-    let otherContact = {};
     for (let i = 0; i < cantDivs; i++) {
+        let otherContact = {};
         const nombre = document.querySelectorAll('.nameOthers')[i].value;
         const telefono = document.querySelectorAll('.phoneOthers')[i].value;
         const grado = document.querySelectorAll('.gradoOthers')[i].value;
         otherContact.nombre = `${nombre}`;
         otherContact.phone = `${telefono}`;
         otherContact.grado = `${grado}`;
-        otherContacts.push(otherContact)
+        otherContacts.push(otherContact);
     }
-    console.log(otherContacts)
+    console.log(otherContacts);
+    //console.log(otherContacts[0]);
     //let namesOthers = document.querySelectorAll('.nameOthers')[1];
     //console.log(namesOthers)
     //alert(`form enviado con ${cantDivs} divs - 1: ${nombreOtro}`)
-
+    const datos = new FormData();
+    datos.append("accion", "PRUEBA");
+    datos.append("otros", JSON.stringify(otherContacts));
+    const retorno = await postData(datos);
+    console.log(retorno)
 })
+
 
 /* APP */
 async function postData(data) {

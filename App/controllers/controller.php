@@ -14,5 +14,10 @@ function controller($accion)
             $listadoUnidades = $listadoUnidades->fetchAll(PDO::FETCH_OBJ);
             echo json_encode($listadoUnidades);
             break;
+        case 'PRUEBA':
+            $otros = json_decode($_POST['otros']);
+            $respuesta = ['rpta' => 'ok', 'data' => $otros];
+            echo json_encode($respuesta);
+            break;
     }
 }
