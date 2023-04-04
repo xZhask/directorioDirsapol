@@ -2,7 +2,6 @@ const btnAddContacto = document.querySelector('#btnAddNumber');
 const divContact = document.querySelector('.others_contacts');
 const formContacto = document.querySelector('#formContact')
 
-
 let contador = 1;
 
 btnAddContacto.addEventListener('click', () => {
@@ -51,7 +50,6 @@ btnAddContacto.addEventListener('click', () => {
     inputTelefono.classList.add('phone')
     inputTelefono.classList.add('phoneOthers')
 
-
     contInputGrado.appendChild(labelGrado)
     contInputGrado.appendChild(inputGrado)
     contInputTelefono.appendChild(labelTelefono)
@@ -84,18 +82,12 @@ formContacto.addEventListener('submit', async (e) => {
         otherContact.grado = `${grado}`;
         otherContacts.push(otherContact);
     }
-    console.log(otherContacts);
-    //console.log(otherContacts[0]);
-    //let namesOthers = document.querySelectorAll('.nameOthers')[1];
-    //console.log(namesOthers)
-    //alert(`form enviado con ${cantDivs} divs - 1: ${nombreOtro}`)
     const datos = new FormData();
     datos.append("accion", "PRUEBA");
     datos.append("otros", JSON.stringify(otherContacts));
     const retorno = await postData(datos);
     console.log(retorno)
 })
-
 
 /* APP */
 async function postData(data) {
@@ -106,14 +98,13 @@ async function postData(data) {
     return await response;
 }
 
-window.addEventListener("load", async () => {
+/* window.addEventListener("load", async () => {
     const datos = new FormData();
     datos.append("accion", "LISTAR_UNIDADES");
     const cargarUnidades = await postData(datos);
     const unidadesList = cargarUnidades.map((unidad) => unidad.nombreIpress);
     CargarAutocompletado(unidadesList, cargarUnidades);
 });
-
 
 function CargarAutocompletado(list, unidades) {
     $("#nombreIpress").autocomplete({
@@ -125,7 +116,7 @@ function CargarAutocompletado(list, unidades) {
             alert(idIpress)
         },
     });
-}
+} */
 const isNumber = (e) => {
     if (e.keyCode < 48 || e.keyCode > 57) return false;
 };

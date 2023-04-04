@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (empty($_SESSION['active'])) {
+    header('location: login.php');
+}
+$nombreIpress = $_SESSION['nombreIpress'];
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,13 +15,13 @@
     <script src="https://kit.fontawesome.com/47b4aaa3bf.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="resources/js/jquery-ui-1.13.1/jquery-ui.min.css">
     <link rel="stylesheet" href="resources/css/style.css">
-    <title>Document</title>
+    <title>Directorio</title>
 </head>
 
 <body>
     <div class="wrapper">
         <div class="cont-form">
-            <h2>Registro de Contacto
+            <h2><? echo $nombreIpress; ?>
                 <span>UNIINSAN - ESTADÍSTICA DIRSAPOL</span>
             </h2>
             <form id="formContact" autocomplete="off">
