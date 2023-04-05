@@ -15,8 +15,25 @@ function controller($accion)
             echo json_encode($listadoUnidades);
             break;
         case 'PRUEBA':
+            $jefeIpress = [
+                'nombre' => $_POST['nombreJefeIpress'],
+                'grado' => $_POST['gradoJefeIpress'],
+                'telefono' => $_POST['telefonoJefeIpress']
+            ];
+            $jefeArea = [
+                'nombre' => $_POST['nombreJefe'],
+                'grado' => $_POST['gradoJefe'],
+                'telefono' => $_POST['telefonoJefe']
+            ];
             $otros = json_decode($_POST['otros']);
-            $respuesta = ['rpta' => 'ok', 'data' => $otros];
+            $otroContacto1 = [
+                'nombre' => $otros[0]->{'nombre'},
+                'grado' => $otros[0]->{'grado'},
+                'telefono' => $otros[0]->{'phone'},
+                'cantidad' => count($otros),
+            ];
+
+            $respuesta = ['rpta' => 'ok', 'JefeIpress' => $jefeIpress, 'JefeArea' => $jefeArea, 'otrosContactos' => $otros, 'Contact01' => $otroContacto1];
             echo json_encode($respuesta);
             break;
         case 'LOGIN':

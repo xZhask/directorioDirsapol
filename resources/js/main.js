@@ -82,7 +82,7 @@ formContacto.addEventListener('submit', async (e) => {
         otherContact.grado = `${grado}`;
         otherContacts.push(otherContact);
     }
-    const datos = new FormData();
+    const datos = new FormData(formContacto);
     datos.append("accion", "PRUEBA");
     datos.append("otros", JSON.stringify(otherContacts));
     const retorno = await postData(datos);
@@ -126,3 +126,4 @@ const isSpace = (e) => {
 $(document).on("keypress", ".phone", (e) => { return isNumber(e); });
 $(document).on("keypress", "#correoIpress", (e) => { return isSpace(e); });
 
+/* REGISTRO */
