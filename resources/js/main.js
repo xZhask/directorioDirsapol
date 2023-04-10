@@ -83,7 +83,7 @@ formContacto.addEventListener('submit', async (e) => {
         otherContacts.push(otherContact);
     }
     const datos = new FormData(formContacto);
-    datos.append("accion", "PRUEBA");
+    datos.append("accion", "REGISTRAR_CONTACTOS");
     datos.append("otros", JSON.stringify(otherContacts));
     const retorno = await postData(datos);
     console.log(retorno)

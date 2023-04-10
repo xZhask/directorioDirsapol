@@ -18,7 +18,20 @@ class clsContacto
         $pre->execute($parametros);
         return $pre;
     }
-    function ActualizarEmails($datosContacto)
+    function actualizarEmails($datosContacto)
+    {
+        $sql = 'UPDATE ipress SET "emailEstadistica"=:emailEstadistica, "emailIpress"=:emailIpress WHERE "idIpress"=:idIpress)';
+        $parametros = [
+            ':emailEstadistica' => $datosContacto['emailEstadistica'],
+            ':emailIpress' => $datosContacto['emailIpress'],
+            ':idIpress' => $datosContacto['idIpress'],
+        ];
+        global $cnx;
+        $pre = $cnx->prepare($sql);
+        $pre->execute($parametros);
+        return $pre;
+    }
+    function limpiarContactos($datosContacto)
     {
         $sql = 'UPDATE ipress SET "emailEstadistica"=:emailEstadistica, "emailIpress"=:emailIpress WHERE "idIpress"=:idIpress)';
         $parametros = [
@@ -32,3 +45,8 @@ class clsContacto
         return $pre;
     }
 }
+
+/*
+DELETE FROM contacto
+	WHERE "idIpress"=;
+     */

@@ -1,7 +1,7 @@
 <?php
 require_once 'conexion.php';
 
-class ClsIpress
+class clsIpress
 {
     function ListarIpress()
     {

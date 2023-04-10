@@ -60,8 +60,8 @@ $nombreIpress = $_SESSION['nombreIpress'];
                     </div>
                 </div>
                 <div class="cont-input">
-                    <label for="correoIpress">Correo institucional del área</label>
-                    <input type="email" name="correoIpress" id="correoIpress">
+                    <label for="correoArea">Correo institucional del área</label>
+                    <input type="email" name="correoArea" id="correoArea">
                 </div>
 
                 <h3>Otros contactos estadística</h3>
