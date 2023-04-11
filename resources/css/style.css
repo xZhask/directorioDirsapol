@@ -365,3 +365,7 @@ input {
 input:focus {
     border: 1px solid var(--primary);
 }
+
+table tr:nth-child(even) {
+    background-color: #f1f2f6;
+}

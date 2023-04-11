@@ -9,7 +9,16 @@ async function postData(data) {
     }).then((res) => res.json());
     return await response;
 }
-
+const msgAlert = (icono, titulo, texto) => {
+    Swal.fire({
+        position: "top-end",
+        icon: icono,
+        title: titulo,
+        text: texto,
+        showConfirmButton: false,
+        timer: 2000,
+    });
+};
 window.addEventListener("load", async () => {
     const data = new FormData();
     data.append("accion", "LISTAR_UNIDADES");
@@ -25,5 +34,6 @@ formLogin.addEventListener('submit', async (e) => {
     const respuesta = await postData(data);
     console.log(respuesta.rpta)
     if (respuesta.rpta === 'success') location.assign('index.php');
-    else alert(respuesta.data);
+    else msgAlert('warning', 'Error de acceso', 'La contraseña no coincide');
 })
+

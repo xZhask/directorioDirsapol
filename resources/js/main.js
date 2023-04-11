@@ -127,3 +127,15 @@ $(document).on("keypress", ".phone", (e) => { return isNumber(e); });
 $(document).on("keypress", "#correoIpress", (e) => { return isSpace(e); });
 
 /* REGISTRO */
+/*
+const msgAlert = (icono, titulo, texto) => {
+  Swal.fire({
+    position: "top-end",
+    icon: icono,
+    title: titulo,
+    text: texto,
+    showConfirmButton: false,
+    timer: 2000,
+  });
+};
+ */

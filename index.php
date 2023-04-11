@@ -12,7 +12,13 @@ $nombreIpress = $_SESSION['nombreIpress'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
     <script src="https://kit.fontawesome.com/47b4aaa3bf.js" crossorigin="anonymous"></script>
+    <link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css
+" rel="stylesheet">
     <link rel="stylesheet" href="resources/js/jquery-ui-1.13.1/jquery-ui.min.css">
     <link rel="stylesheet" href="resources/css/style.css">
     <title>Directorio</title>
@@ -37,7 +43,7 @@ $nombreIpress = $_SESSION['nombreIpress'];
                     </div>
                     <div class="cont-input">
                         <label for="telefonoJefeIpress">Teléfono</label>
-                        <input type="tel" name="telefonoJefeIpress" id="telefonoJefeIpress" class="phone">
+                        <input type="tel" name="telefonoJefeIpress" id="telefonoJefeIpress" class="phone" autocomplete="nope">
                     </div>
                 </div>
                 <div class="cont-input">
@@ -56,7 +62,7 @@ $nombreIpress = $_SESSION['nombreIpress'];
                     </div>
                     <div class="cont-input">
                         <label for="telefonoJefe">Teléfono</label>
-                        <input type="tel" name="telefonoJefe" id="telefonoJefe" class="phone">
+                        <input type="tel" name="telefonoJefe" id="telefonoJefe" class="phone" autocomplete="nope">
                     </div>
                 </div>
                 <div class="cont-input">
@@ -93,6 +99,9 @@ $nombreIpress = $_SESSION['nombreIpress'];
     </div>
     <script language="javascript" src="resources/js/jquery-3.6.0.min.js"></script>
     <script language="javascript" src="resources/js/jquery-ui-1.13.1/jquery-ui.min.js"></script>
+    <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+"></script>
     <script src="resources/js/main.js"></script>
 </body>
 
