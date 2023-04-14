@@ -3,6 +3,11 @@ session_start();
 if (empty($_SESSION['active'])) {
     header('location: login.php');
 }
+
+if ($_SESSION['idIpress'] === 82) {
+    header('location: directoriodirsapol.php');
+}
+
 $nombreIpress = $_SESSION['nombreIpress'];
 ?>
 <!DOCTYPE html>
@@ -29,6 +34,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css
         <div class="cont-form">
             <h2><? echo $nombreIpress; ?>
                 <span>UNIINSAN - ESTADÍSTICA DIRSAPOL</span>
+                <i class="fa-solid fa-power-off btn-salir"></i>
             </h2>
             <form id="formContact" autocomplete="off">
                 <h3>Ipress</h3>
@@ -96,6 +102,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css
                 <button type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
             </form>
         </div>
+
     </div>
     <script language="javascript" src="resources/js/jquery-3.6.0.min.js"></script>
     <script language="javascript" src="resources/js/jquery-ui-1.13.1/jquery-ui.min.js"></script>

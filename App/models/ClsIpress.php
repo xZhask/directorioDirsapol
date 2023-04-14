@@ -5,7 +5,7 @@ class clsIpress
 {
     function ListarIpress()
     {
-        $sql = 'SELECT "idIpress","nombreIpress" FROM ipress';
+        $sql = 'SELECT "idIpress","nombreIpress","emailEstadistica", "emailIpress" FROM ipress ORDER BY "nombreIpress"';
         global $cnx;
         return $cnx->query($sql);
     }

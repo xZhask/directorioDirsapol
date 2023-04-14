@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap');
+
 :root {
     --primary: #55E6C1;
     --primary-hard: #0fb9b1;
@@ -7,7 +9,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 .wrapper {
@@ -368,4 +370,33 @@ input:focus {
 
 table tr:nth-child(even) {
     background-color: #f1f2f6;
+}
+
+h2 {
+    position: relative;
+}
+
+.btn-salir {
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    color: #eb4d4b;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .wr-login {
+        flex-direction: column;
+        justify-content: center;
+        gap: 3em;
+    }
+
+    .wr-login .linea-v {
+        display: none;
+    }
+
+    .cont-logo-inicial img {
+        height: 200px;
+    }
 }

@@ -25,9 +25,9 @@ function controller($accion)
                 'emailIpress' => $_POST['correoIpress'],
                 'idIpress' => $idIpress,
             ];
-            $objContacto->actualizarEmails($datosEmails);
+            $updateEmails = $objContacto->actualizarEmails($datosEmails);
             /* LIMPIAR CONTACTOS REGISTRADOS */
-            $objContacto->limpiarContactos($idIpress);
+            $limpiarContactos = $objContacto->limpiarContactos($idIpress);
             /* REGISTRO JEFE DE IPRESS */
             $jefeIpress = [
                 'nombre' => $_POST['nombreJefeIpress'],
@@ -36,7 +36,7 @@ function controller($accion)
                 'tipo' => 'J',
                 'idIpress' => $idIpress,
             ];
-            $objContacto->registrarContacto($jefeIpress);
+            $registrarJefeIpress = $objContacto->registrarContacto($jefeIpress);
 
             /* REGISTRO JEFE DE ÁREA */
             $jefeArea = [
@@ -46,7 +46,7 @@ function controller($accion)
                 'tipo' => 'A',
                 'idIpress' => $idIpress,
             ];
-            $objContacto->registrarContacto($jefeArea);
+            $registrarJefeArea = $objContacto->registrarContacto($jefeArea);
 
             /* REGISTRO JEFE DE OTROS CONTACTOS */
             $otros = json_decode($_POST['otros']);
@@ -61,7 +61,14 @@ function controller($accion)
                 ];
                 $objContacto->registrarContacto($contacto);
             }
-            $respuesta = ['rpta' => 'ok', 'data' => ''];
+            if ($updateEmails > 0 && $limpiarContactos > 0 && $registrarJefeIpress > 0 && $registrarJefeArea > 0) {
+                $rpta = 'Ok';
+                $mensaje = 'Se registró correctamente';
+            } else {
+                $rpta = 'fail';
+                $mensaje = 'Ocurrió un error, intentelo nuevamente';
+            }
+            $respuesta = ['rpta' => $rpta, 'data' => $mensaje];
             echo json_encode($respuesta);
             break;
 
@@ -90,6 +97,53 @@ function controller($accion)
             }
             $respuesta = ['rpta' => $rpta, 'data' => $mensaje];
             echo json_encode($respuesta);
+            break;
+        case 'LOGOUT':
+            session_start();
+            if (!empty($_SESSION['active']) == true) {
+                $_SESSION['active'] = false;
+                session_destroy();
+                $response = ['rpta' => 'logout'];
+                echo json_encode($response);
+            }
+            break;
+        case 'CARGAR_DIRECTORIO':
+            $tabla = '';
+
+            $listado = $objIpress->ListarIpress();
+            $listado = $listado->fetchAll(pdo::FETCH_OBJ);
+            foreach ($listado as $k => $v) {
+                $tabla .= '<tr>';
+                $tabla .= '<td><p>' . $v->nombreIpress . '</p>';
+                $tabla .= '<p class="p-email">Ipress: <span>unidad.ipress@policia.gob.pe</span></p>';
+                $tabla .= '<p class="p-email">Estadíst.: <span>unidad.estadistica@policia.gob.pe</span></p></td>';
+
+
+                $tabla .= '<td><p>Grado</p>';
+                $tabla .= '<p class="p-negrita">Apellidos y nombres jefe de Ipress</p>';
+                $tabla .= '<p>Telef.: 965201110</p></td>';
+
+                $tabla .= '<td><p>Grado</p>';
+                $tabla .= '<p class="p-negrita">Apellidos y nombres jefe de Est</p>';
+                $tabla .= '<p>Telef.: 965201110</p></td>';
+
+                $tabla .= '<td>';
+                #For
+                $tabla .= '<td>';
+                $tabla .= '<div class="other-contact">
+                                <p class="p-negrita"> Grado Apellidos y Nombres de Otros</p>
+                                <p>Telef.: 965201110</p>
+                            </div>
+                            <div class="other-contact">
+                                <p class="p-negrita"> Grado Apellidos y Nombres de Otros</p>
+                                <p>Telef.: 965201110</p>
+                            </div>';
+                $tabla .= '</td>';
+
+                $tabla .= '</tr>';
+            }
+            $response = ['data' => $tabla];
+            echo json_encode($response);
             break;
     }
 }

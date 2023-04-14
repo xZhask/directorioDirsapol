@@ -24,7 +24,8 @@ window.addEventListener("load", async () => {
     data.append("accion", "LISTAR_UNIDADES");
     const cargarUnidades = await postData(data);
     const unidadesList = cargarUnidades.map((unidad) => `<option value=${unidad.idIpress}>${unidad.nombreIpress}</option>`).join('');
-    ipress.innerHTML = unidadesList
+    ipress.innerHTML = `<option value="0">SELECCIONAR IPRESS</option> ${unidadesList}`;
+    //ipress.innerHTML = unidadesList
 });
 
 formLogin.addEventListener('submit', async (e) => {

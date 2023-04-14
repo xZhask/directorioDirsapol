@@ -1,8 +1,20 @@
 const btnAddContacto = document.querySelector('#btnAddNumber');
 const divContact = document.querySelector('.others_contacts');
 const formContacto = document.querySelector('#formContact')
+const btnSalir = document.querySelector('.btn-salir')
 
 let contador = 1;
+
+const msgAlert = (icono, titulo, texto) => {
+    Swal.fire({
+        position: "top-end",
+        icon: icono,
+        title: titulo,
+        text: texto,
+        showConfirmButton: false,
+        timer: 2000,
+    });
+};
 
 btnAddContacto.addEventListener('click', () => {
     contador++;
@@ -87,6 +99,8 @@ formContacto.addEventListener('submit', async (e) => {
     datos.append("otros", JSON.stringify(otherContacts));
     const retorno = await postData(datos);
     console.log(retorno)
+    if (retorno.rpta === 'Ok') msgAlert('success', 'Se registró correctamente', retorno.mensaje)
+    else msgAlert('error', 'Ocurrió un inconveniente', retorno.mensaje)
 })
 
 /* APP */
@@ -97,26 +111,6 @@ async function postData(data) {
     }).then((res) => res.json());
     return await response;
 }
-
-/* window.addEventListener("load", async () => {
-    const datos = new FormData();
-    datos.append("accion", "LISTAR_UNIDADES");
-    const cargarUnidades = await postData(datos);
-    const unidadesList = cargarUnidades.map((unidad) => unidad.nombreIpress);
-    CargarAutocompletado(unidadesList, cargarUnidades);
-});
-
-function CargarAutocompletado(list, unidades) {
-    $("#nombreIpress").autocomplete({
-        source: list,
-        select: (e, item) => {
-            let unidad = item.item.value;
-            let position = list.indexOf(unidad);
-            idIpress = unidades[position].idIpress;
-            alert(idIpress)
-        },
-    });
-} */
 const isNumber = (e) => {
     if (e.keyCode < 48 || e.keyCode > 57) return false;
 };
@@ -127,15 +121,18 @@ $(document).on("keypress", ".phone", (e) => { return isNumber(e); });
 $(document).on("keypress", "#correoIpress", (e) => { return isSpace(e); });
 
 /* REGISTRO */
-/*
-const msgAlert = (icono, titulo, texto) => {
-  Swal.fire({
-    position: "top-end",
-    icon: icono,
-    title: titulo,
-    text: texto,
-    showConfirmButton: false,
-    timer: 2000,
-  });
-};
- */
+btnSalir.addEventListener('click', async () => {
+    const datos = new FormData();
+    datos.append("accion", "LOGOUT");
+    const respuesta = await postData(datos);
+    if (respuesta.rpta == 'logout') location.assign('login.php');
+})
+async function cargarDirectorio() {
+    const tb = document.querySelector('#tb-directorio');
+    const datos = new FormData();
+    datos.append("accion", "CARGAR_DIRECTORIO");
+    const respuesta = await postData(datos);
+    console.log(respuesta.data)
+    tb.innerHTML = respuesta.data;
+
+}
