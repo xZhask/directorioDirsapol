@@ -306,32 +306,39 @@ form label {
     width: 100%;
 }
 
-.cont-table {
+.cont-listado {
     width: 100%;
     max-width: 1250px;
     padding: 0 1em;
+
 }
 
-.cont-table table {
+.body-table {
+    max-height: 600px;
+    width: 100%;
+    overflow: overlay;
+}
+
+.cont-listado table {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid var(--primary-hard);
 }
 
-.cont-table table th {
+.cont-listado table th {
     background-color: var(--primary);
     padding: 10px 0;
     font-size: .8em;
 }
 
-.cont-table table td {
+.cont-listado table td {
     padding: 7px;
     font-size: .8em;
     border: 1px solid var(--primary-hard);
     color: #5f5f61;
 }
 
-.cont-table table td p {
+.cont-listado table td p {
     margin-top: 5px;
 }
 
@@ -349,6 +356,9 @@ form label {
 
 .header-table {
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .header-table input {
@@ -399,4 +409,9 @@ h2 {
     .cont-logo-inicial img {
         height: 200px;
     }
+}
+
+.contador {
+    font-weight: 500;
+
 }

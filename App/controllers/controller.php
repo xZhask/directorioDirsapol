@@ -51,16 +51,22 @@ function controller($accion)
             /* REGISTRO JEFE DE OTROS CONTACTOS */
             $otros = json_decode($_POST['otros']);
             $cont = count($otros);
+
             for ($i = 0; $i < $cont; $i++) {
-                $contacto = [
-                    'nombre' => $otros[$i]->{'nombre'},
-                    'grado' => $otros[$i]->{'grado'},
-                    'telefono' => $otros[$i]->{'phone'},
-                    'tipo' => 'O',
-                    'idIpress' => $idIpress,
-                ];
-                $objContacto->registrarContacto($contacto);
+                $nombre = $otros[$i]->{'nombre'};
+                if ($nombre !== '') {
+                    $contacto = [
+                        'nombre' => $nombre,
+                        'grado' => $otros[$i]->{'grado'},
+                        'telefono' => $otros[$i]->{'phone'},
+                        'tipo' => 'O',
+                        'idIpress' => $idIpress,
+                    ];
+                    $objContacto->registrarContacto($contacto);
+                }
             }
+
+
             if ($updateEmails > 0 && $limpiarContactos > 0 && $registrarJefeIpress > 0 && $registrarJefeArea > 0) {
                 $rpta = 'Ok';
                 $mensaje = 'Se registró correctamente';
@@ -107,42 +113,60 @@ function controller($accion)
                 echo json_encode($response);
             }
             break;
-        case 'CARGAR_DIRECTORIO':
+        case 'LISTADO_DIRECTORIO':
+            $filtro = $_POST['filtro'];
+            $cont = 0;
+            if ($filtro === '' || $filtro === 'NULL') $listado = $objIpress->ListarIpress();
+            else $listado = $objIpress->filtrarIpress($filtro);
+
             $tabla = '';
 
-            $listado = $objIpress->ListarIpress();
             $listado = $listado->fetchAll(pdo::FETCH_OBJ);
             foreach ($listado as $k => $v) {
+                $idIpress = $v->idIpress;
                 $tabla .= '<tr>';
                 $tabla .= '<td><p>' . $v->nombreIpress . '</p>';
-                $tabla .= '<p class="p-email">Ipress: <span>unidad.ipress@policia.gob.pe</span></p>';
-                $tabla .= '<p class="p-email">Estadíst.: <span>unidad.estadistica@policia.gob.pe</span></p></td>';
-
-
-                $tabla .= '<td><p>Grado</p>';
-                $tabla .= '<p class="p-negrita">Apellidos y nombres jefe de Ipress</p>';
-                $tabla .= '<p>Telef.: 965201110</p></td>';
-
-                $tabla .= '<td><p>Grado</p>';
-                $tabla .= '<p class="p-negrita">Apellidos y nombres jefe de Est</p>';
-                $tabla .= '<p>Telef.: 965201110</p></td>';
+                $tabla .= '<p class="p-email">Ipress: <span>' . $v->emailIpress . '</span></p>';
+                $tabla .= '<p class="p-email">Estadíst.: <span>' . $v->emailEstadistica . '</span></p></td>';
 
                 $tabla .= '<td>';
-                #For
+                $jefeIpress = $objContacto->listarContacto('J', $idIpress);
+
+                if ($jefeIpress->rowCount() > 0) {
+                    $jefeIpress = $jefeIpress->fetch(PDO::FETCH_OBJ);
+                    $tabla .= '<p>' . $jefeIpress->grado . '</p>';
+                    $tabla .= '<p class="p-negrita">' . $jefeIpress->nombre . '</p>';
+                    $tabla .= '<p>Telef.: ' .  $jefeIpress->telefono . '</p>';
+                }
+                $tabla .= '</td>';
                 $tabla .= '<td>';
-                $tabla .= '<div class="other-contact">
-                                <p class="p-negrita"> Grado Apellidos y Nombres de Otros</p>
-                                <p>Telef.: 965201110</p>
-                            </div>
-                            <div class="other-contact">
-                                <p class="p-negrita"> Grado Apellidos y Nombres de Otros</p>
-                                <p>Telef.: 965201110</p>
-                            </div>';
+                $jefeArea = $objContacto->listarContacto('A', $idIpress);
+
+                if ($jefeArea->rowCount() > 0) {
+                    $jefeArea = $jefeArea->fetch(PDO::FETCH_OBJ);
+                    $tabla .= '<p>' . $jefeArea->grado . '</p>';
+                    $tabla .= '<p class="p-negrita">' . $jefeArea->nombre . '</p>';
+                    $tabla .= '<p>Telef.: ' . $jefeArea->telefono . '</p>';
+                    $cont++;
+                }
                 $tabla .= '</td>';
 
+                #For
+                $tabla .= '<td>';
+                $otrosContactos = $objContacto->listarContacto('O', $idIpress);
+                if ($otrosContactos->rowCount() > 0) {
+                    while ($fila = $otrosContactos->fetch(PDO::FETCH_OBJ)) {
+                        # code...
+                        $tabla .= '<div class="other-contact">
+                                <p class="p-negrita"> ' . $fila->grado . ' ' . $fila->nombre . '</p>
+                                <p>Telef.: ' . $fila->telefono . '</p>
+                            </div>';
+                    }
+                }
+                $tabla .= '</td>';
                 $tabla .= '</tr>';
             }
-            $response = ['data' => $tabla];
+            $response = ['data' => $tabla, 'total' => $cont];
             echo json_encode($response);
             break;
     }

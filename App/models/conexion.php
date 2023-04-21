@@ -7,7 +7,7 @@ try {
     $db = 'directorio';
     //$usuario = 'odindeveloper_josue';
     //$pass = 'b(=-.[52yyfy';
-    //$db = 'odindeveloper_dbcpms';
+    //$db = 'odindeveloper_directoriodirsapol';
     $cadena = "$manejador:host=$servidor;dbname=$db";
     $cnx = new PDO($cadena, $usuario, $pass);
     date_default_timezone_set('America/Lima');

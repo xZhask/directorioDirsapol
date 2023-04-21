@@ -127,12 +127,3 @@ btnSalir.addEventListener('click', async () => {
     const respuesta = await postData(datos);
     if (respuesta.rpta == 'logout') location.assign('login.php');
 })
-async function cargarDirectorio() {
-    const tb = document.querySelector('#tb-directorio');
-    const datos = new FormData();
-    datos.append("accion", "CARGAR_DIRECTORIO");
-    const respuesta = await postData(datos);
-    console.log(respuesta.data)
-    tb.innerHTML = respuesta.data;
-
-}

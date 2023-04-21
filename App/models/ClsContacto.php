@@ -42,6 +42,18 @@ class clsContacto
         $pre->execute($parametros);
         return $pre->rowCount();
     }
+    function listarContacto($tipo, $idIpress)
+    {
+        $sql = 'SELECT nombre, grado, telefono FROM contacto WHERE "idIpress"=:idIpress AND tipo=:tipo';
+        $parametros = [
+            ':tipo' => $tipo,
+            ':idIpress' => $idIpress,
+        ];
+        global $cnx;
+        $pre = $cnx->prepare($sql);
+        $pre->execute($parametros);
+        return $pre;
+    }
 }
 
 /*

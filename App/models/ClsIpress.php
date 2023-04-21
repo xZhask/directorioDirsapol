@@ -20,4 +20,15 @@ class clsIpress
         $pre->execute($parametros);
         return $pre;
     }
+    function filtrarIpress($filtro)
+    {
+        $sql = 'SELECT "idIpress", "nombreIpress", "emailEstadistica", "emailIpress" FROM ipress WHERE "nombreIpress" ILIKE :filtro';
+        $parametros = [
+            ':filtro' => '%' . $filtro . '%',
+        ];
+        global $cnx;
+        $pre = $cnx->prepare($sql);
+        $pre->execute($parametros);
+        return $pre;
+    }
 }

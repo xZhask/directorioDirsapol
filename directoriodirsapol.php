@@ -3,6 +3,9 @@ session_start();
 if (empty($_SESSION['active'])) {
     header('location: login.php');
 }
+if ($_SESSION['idIpress'] !== 82) {
+    header('location: index.php');
+}
 $nombreIpress = $_SESSION['nombreIpress'];
 ?>
 <!DOCTYPE html>
@@ -20,81 +23,32 @@ $nombreIpress = $_SESSION['nombreIpress'];
 
 <body>
     <div class="wrapper">
-        <div class="cont-table">
+        <div class="cont-listado">
             <div class="header-table">
                 <input type="text" name="nombreIpress" id="nombreIpress" placeholder="Buscar...">
+                <p class="contador" id="contador">0/82</p>
+                <i class="fa-solid fa-power-off btn-salir"></i>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>IPRESS</th>
-                        <th>JEFE IPRESS</th>
-                        <th>JEFE ÁREA</th>
-                        <th>OTROS CONTACTOS ESTADÍSTICA</th>
-                    </tr>
-                </thead>
-                <tbody id="tb-directorio">
-                    <tr>
-                        <td>
-                            <p> NOMBRE DE IPRESS</p>
-                            <p class="p-email">Ipress: <span>unidad.ipress@policia.gob.pe</span></p>
-                            <p class="p-email">Estadíst.: <span>unidad.estadistica@policia.gob.pe</span></p>
-                        </td>
-                        <td>
-                            <p>Grado</p>
-                            <p class="p-negrita">Apellidos y nombres jefe de Ipress</p>
-                            <p>Telef.: 965201110</p>
-                        </td>
-                        <td>
-                            <p>Grado</p>
-                            <p class="p-negrita">Apellidos y nombres jefe de Est</p>
-                            <p>Telef.: 965201110</p>
-                        </td>
-                        <td>
-                            <div class="other-contact">
-                                <p class="p-negrita"> Grado Apellidos y Nombres de Otros</p>
-                                <p>Telef.: 965201110</p>
-                            </div>
-                            <div class="other-contact">
-                                <p class="p-negrita"> Grado Apellidos y Nombres de Otros</p>
-                                <p>Telef.: 965201110</p>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p> NOMBRE DE IPRESS</p>
-                            <p class="p-email">Ipress: <span>unidad.ipress@policia.gob.pe</span></p>
-                            <p class="p-email">Estadíst.: <span>unidad.estadistica@policia.gob.pe</span></p>
-                        </td>
-                        <td>
-                            <p>Grado</p>
-                            <p class="p-negrita">Apellidos y nombres jefe de Ipress</p>
-                            <p>Telef.: 965201110</p>
-                        </td>
-                        <td>
-                            <p>Grado</p>
-                            <p class="p-negrita">Apellidos y nombres jefe de Est</p>
-                            <p>Telef.: 965201110</p>
-                        </td>
-                        <td>
-                            <div class="other-contact">
-                                <p class="p-negrita"> Grado Apellidos y Nombres de Otros</p>
-                                <p>Telef.: 965201110</p>
-                            </div>
-                            <div class="other-contact">
-                                <p class="p-negrita"> Grado Apellidos y Nombres de Otros</p>
-                                <p>Telef.: 965201110</p>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="body-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IPRESS</th>
+                            <th>JEFE IPRESS</th>
+                            <th>JEFE ÁREA</th>
+                            <th>OTROS CONTACTOS ESTADÍSTICA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb-directorio">
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
     <script language="javascript" src="resources/js/jquery-3.6.0.min.js"></script>
     <script language="javascript" src="resources/js/jquery-ui-1.13.1/jquery-ui.min.js"></script>
-    <script src="resources/js/main.js"></script>
+    <script src="resources/js/directorio.js"></script>
     <script>
         cargarDirectorio()
     </script>
