@@ -99,7 +99,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css
                 <div class="cont-agregar">
                     <a id="btnAddNumber"><i class="fa-solid fa-plus"></i>Agregar otro número</a>
                 </div>
-                <button type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                <button type="submit" id="updateContacto"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
             </form>
         </div>
 
